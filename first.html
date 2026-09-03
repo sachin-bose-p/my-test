@@ -1,0 +1,74 @@
+<html><head>
+
+<script language="JavaScript">
+window.onload = maxWindow;
+
+function maxWindow() {
+    window.moveTo(0,0);
+
+    if (document.all) {
+        top.window.resizeTo(screen.availWidth,screen.availHeight);
+    } else if (document.layers || document.getElementById) {
+        if (top.window.outerHeight < screen.availHeight || top.window.outerWidth < screen.availWidth) {
+            top.window.outerHeight = screen.availHeight;
+            top.window.outerWidth = screen.availWidth;
+        }
+    }
+}
+
+</script>
+
+<script type="text/javascript">
+function windowClose(evt) {
+    var iX = window.event.clientX ;
+    var iY = window.event.clientY ;
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
+        var ieversion = new Number(RegExp.$1);
+    }
+    if (ieversion >= 7) {
+        if (iX > 0 && iY < 0) {
+            window.parent.location.href = '/mlt/endpreaction.do';
+        }
+    } else {
+        if (iX < (-5000) && iY < (-5000) && window.screenTop > 10000) {
+            window.parent.location.href = '/mlt/endpreaction.do';
+        }
+    }
+}
+
+var isCloseInd = 'Y';
+
+function isCloseWindow() {
+    if (isCloseInd && isCloseInd == 'Y') {
+        windowClose();
+    }
+}
+
+function setClose() {
+    isCloseInd = 'N';
+}
+
+function doThis() {
+    setTimeout("setClose()", 1);
+}
+
+
+</script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<title>Integrated Operations Browser (v26.12.38.6.3)</title>
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<frameset cols="200,*">
+    <frame name="filter" src="filter.jsp?window=filter&amp;ivUser=false" frameborder="1" scrolling="auto">
+    <frame name="main" src="main.jsp?window=main" frameborder="0" scrolling="auto">
+</frameset>
+
+<noframes>
+IOB only supported within frames.
+</noframes>
+
+
+</html>
