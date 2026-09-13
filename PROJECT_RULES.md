@@ -16,7 +16,9 @@
 
 ### 2. Design System & UI Specifications
 - **Styling Architecture**: CSS3 Custom Properties (:root theme)
-- **Base Typography**: `system-ui`
+- **Base Typography**: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif`
+
+
 
 #### Active Theme Tokens:
 - `--bg-color: #0f172a`
@@ -34,10 +36,16 @@
 - **Quote Style**: double quotes
 - **Encoding**: UTF-8
 
+
+
+
+
+
 ---
 
 ### 4. AI Coding Agent Operating Directives
 1. **Strict Convention Adherence**: Adhere to the active design tokens, styling architecture, and formatting guidelines specified above.
-2. **Minimal Surgical Changes**: Make precise, targeted changes to address requested issues; avoid broad file refactors.
+2. **Minimal Surgical Changes**: Make precise, targeted changes to address requested issues; avoid broad file refactors or overwriting unaffected code.
 3. **Preserve Interface Integrity**: Maintain existing method signatures, function names, and component interfaces.
-4. **No Unauthorized Dependencies**: Do not introduce external libraries without explicit confirmation.
+4. **No Unauthorized Dependencies**: Do not introduce external libraries or scripts without explicit confirmation.
+5. **Pre-Commit Verification**: Verify changes against syntax errors, formatting inconsistencies, and broken DOM references before finalizing.
