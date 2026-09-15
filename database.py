@@ -29,6 +29,9 @@ class Audit(Base):
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
 # Create an engine
+
+# Create all tables in the engine. This will create the tables defined by Base's subclasses.
+Base.metadata.create_all(engine)
 engine = create_engine(DATABASE_URL)
 # Update the database URL with correct credentials
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://your_username:your_password@localhost:5432/mydatabase')

@@ -30,6 +30,9 @@ config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql:/
 
 target_metadata = Base.metadata
 
+# Ensure all necessary tables are included in the autogenerate process
+from database import User, Role, Permission, Audit
+
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
