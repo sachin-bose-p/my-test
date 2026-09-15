@@ -12,22 +12,29 @@ import os
 from dotenv import load_dotenv
 load_dotenv() # Loading environment variables from .env file
 
-# Setting the default logging format for the application
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# Configure root logging
+logging.root.setLevel(logging.INFO)
 
-# Logger instances for different logging purposes
+# Configure custom logging format and output
+log_format = '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s'
+logging.basicConfig(level=logging.INFO, format=log_format)
+
+# Application logger
 application_logger = logging.getLogger('application')
-application_logger.setLevel(logging.INFO)
+application_logger.propagate = False
 
+# Error logger
 error_logger = logging.getLogger('error')
-error_logger.setLevel(logging.ERROR)
 
-error_handler = logging.FileHandler('error.log')
+# Error handler for writing logs to a file
+error_handler = logging.FileHandler('error.log', mode='a')  # Append mode
 error_handler.setLevel(logging.ERROR)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-error_handler.setFormatter(formatter)
+error_handler.setFormatter(logging.Formatter(log_format))
+
+# Ensure error logs do not propagate to global logger
 error_logger.addHandler(error_handler)
+error_logger.propagate = False
+
 
 
 from fastapi.exceptions import RequestValidationError
@@ -136,7 +143,7 @@ error_logger.setLevel(logging.ERROR)
 
 # Create a logger for job logs
 from sqlalchemy.orm import Session
-from database import get_engine, Base
+from database import get_engine, Base, get_db
 
 
 job_logger = logging.getLogger('job')
@@ -146,6 +153,18 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Health check endpoint
+@app.get('/test-db-connection')
+def test_db_connection(db: Session = Depends(get_db)):
+    """Test database connection injection"""
+    try:
+        # Perform a simple session query or action to ensure the session is working
+        # This is just a placeholder action
+        db.query(User).first()
+        return response_wrapper({'message': 'Dependency Injection for DB successful!'})
+    except Exception as e:
+        error_logger.error(f'Dependency Injection test failed: {e}')
+        return response_wrapper({'message': 'Dependency Injection test failed.', 'error': str(e)}), 500
+
 @app.get('/health')
 def health_check():
     """Health check endpoint returns application status"""
@@ -153,12 +172,14 @@ def health_check():
 
 # Ensure that the `/items/{item_id}` endpoint uses ResponseModel correctly
 # Updating handler to ensure compliance with FastAPI's response models
-@app.get('/items/{item_id}')
-def verify_db_connection():
-    engine = get_engine()
-    connection = engine.connect()
-    connection.close()
-    return {'message': 'Database connectivity successful!'}
+@app.get('/items/{item_id}', response_model=dict)
+def get_item(item_id: int, db: Session = Depends(get_db)):
+    try:
+        db.query(User).filter(User.id == item_id).first()
+        return response_wrapper({'message': 'Item retrieved successfully!'}, "Item Retrieval Successful")
+    except Exception as e:
+        error_logger.error(f'Error retrieving item: {e}')
+        return response_wrapper({'message': 'Error retrieving item.', 'error': str(e)}, "Item Retrieval Failed.")
 
 @app.get('/db-verify')
 def verify_db_connection():
