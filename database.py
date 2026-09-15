@@ -25,7 +25,7 @@ class Audit(Base):
     id = Column(Integer, Sequence('audit_id_seq'), primary_key=True)
     action = Column(String(255))
 
-DATABASE_URL = "postgresql://username:password@localhost:5432/mydatabase"
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
 # Create an engine
 engine = create_engine(DATABASE_URL)
