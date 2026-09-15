@@ -7,6 +7,12 @@ import os
 
 from alembic import context
 
+# Adding the import statement for models.
+import sys
+sys.path.append("C:/My Drive/Projects/repo/my-test")
+from database import User, Role, Permission, Audit
+
+
 import sys
 sys.path.append("C:/My Drive/Projects/repo/my-test")
 from database import Base

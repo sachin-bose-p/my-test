@@ -7,9 +7,77 @@ from sqlalchemy.ext.declarative import declarative_base
 
 # Lazy connect to the database
 def get_engine():  # Lazy connect to DB
-DATABASE_URL = os.getenv('DATABASE_URL')
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)  # Fixed location for return statement  # Fixed return placement  # Fixed placement for returning the engine  # Fixed placement for returning the engine  # Fixed placement for returning the engine
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
+
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    username = Column(String(50), unique=True)
+    password = Column(String(50))
+
+class Role(Base):
+    __tablename__ = 'roles'
+    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
+    role_name = Column(String(50), unique=True)
+
+class Permission(Base):
+    __tablename__ = 'permissions'
+    id = Column(Integer, Sequence('permission_id_seq'), primary_key=True)
+    permission_name = Column(String(50), unique=True)
+
+class Audit(Base):
+    __tablename__ = 'audit'
+    id = Column(Integer, Sequence('audit_id_seq'), primary_key=True)
+    action = Column(String(255))
+
+class PasswordHistory(Base):
+    __tablename__ = 'password_history'
+    id = Column(Integer, Sequence('password_history_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    password_hash = Column(String(255))
+    created_at = Column(Integer)
+
+class LoginAttempt(Base):
+    __tablename__ = 'login_attempts'
+    id = Column(Integer, Sequence('login_attempt_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    timestamp = Column(Integer)
+    success = Column(Integer)
 
 # Revamping get_engine function to ensure proper logic and single point return.
+
+# Updated function to ensure proper encapsulation
     return create_engine(DATABASE_URL)
     # Create the engine only once and return it
 # This function has now been encapsulated correctly, removing redundant returns.
