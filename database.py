@@ -9,13 +9,6 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 def get_engine():  # Lazy connect to DB
     if DATABASE_URL is None or DATABASE_URL == 'postgresql://username:password@localhost:5432/mydatabase':
         raise ValueError('DATABASE_URL not set or incorrectly configured')
-
-    if not DATABASE_URL:
-        raise ValueError('DATABASE_URL not set')
-        raise ValueError('DATABASE_URL not set')
-    return create_engine(DATABASE_URL)
-    if DATABASE_URL is None or DATABASE_URL == 'postgresql://username:password@localhost:5432/mydatabase':
-        raise ValueError('DATABASE_URL not set or incorrectly configured')
     
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
@@ -36,7 +29,6 @@ class User(Base):
 
 class Role(Base):
     __tablename__ = 'roles'
-    __table_args__ = {'extend_existing': True}
     id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
     role_name = Column(String(50), unique=True)
 
@@ -49,17 +41,6 @@ class Audit(Base):
     __tablename__ = 'audit'
     id = Column(Integer, Sequence('audit_id_seq'), primary_key=True)
     action = Column(String(255))
-
-class Role(Base):
-    __tablename__ = 'roles'
-    __table_args__ = {'extend_existing': True}
-    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
-    role_name = Column(String(50), unique=True)
-
-class Role(Base):
-    __tablename__ = 'roles'
-    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
-    role_name = Column(String(50), unique=True)
 
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
 from sqlalchemy.ext.declarative import declarative_base
@@ -103,6 +84,102 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://your_username:your_passwo
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
 Base.metadata.create_all(engine)
 
+    class UserProfiles(Base):
+__tablename__ = 'user_profiles'
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))  # URL for user's profile image
+
+    def __repr__(self):
+        return f'<UserProfiles(id={self.id}, first_name={self.first_name}, last_name={self.last_name})>'
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
+
+    def __repr__(self):
+        return f'<UserProfiles(id={self.id}, first_name={self.first_name}, last_name={self.last_name})>'
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255)) # URL for user's profile image
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True);
+    first_name = Column(String(50));
+    last_name = Column(String(50));
+    phone = Column(String(15));
+    country = Column(String(50));
+    timezone = Column(String(50));
+    currency = Column(String(10));
+    profile_image = Column(String(255));
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255)) # Image URL (path)
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
+
+# Informational comment: make sure the database URL is set in the environment.
+# Also, please avoid hard-coding database credentials.
+
+# Create all tables in the engine. This will create the tables defined by Base's subclasses.
+Base.metadata.create_all(get_engine())
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(15))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
+
 # Database connection URL
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
@@ -110,11 +187,14 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localho
 engine = create_engine(DATABASE_URL)
 
 # Create session makers
+# Removed duplicate UserProfiles class
 Session = sessionmaker(bind=engine)
 
 # Function to get a new session
 
-
+def get_session():
+    Base.metadata.create_all(get_engine())
+    return Session()
     # Create all tables in the engine. This will create the tables defined by Base's subclasses.
     Base.metadata.create_all(get_engine())
     return Session()

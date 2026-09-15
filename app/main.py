@@ -208,6 +208,25 @@ def read_item(item_id: int, db: Session = Depends(get_db)):
 
 # Additional API endpoints can be added below
 
+# GET endpoint for profile
+@app.get('/profile')
+async def get_profile(db: Session = Depends(get_db)):  
+    profiles = db.query(UserProfiles).all()
+    return profiles  
+
+# PUT endpoint for updating profile
+@app.put('/profile')
+async def update_profile(profile: UserProfiles, db: Session = Depends(get_db)):
+    db.query(UserProfiles).filter(UserProfiles.id == profile.id).update(profile.dict())
+    db.commit()
+    return profile
+
+# POST endpoint for uploading image
+@app.post('/profile/upload-image')
+async def upload_image(file: UploadFile, db: Session = Depends(get_db)):
+    # Here you would handle saving the image to a directory and update profile with the image URL.
+    return {'filename': file.filename}
+
 # Endpoint to verify database connectivity
 @app.get('/db-verify')
 def verify_db_connection():
