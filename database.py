@@ -4,18 +4,34 @@ import os
 from sqlalchemy.ext.declarative import declarative_base
 
 # Note: Database URL should be correctly configured in your .env file
+
+# Lazy connect to the database
+def get_engine():  # Lazy connect to DB
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-def get_engine():  # Lazy connect to DB
+# Revamping get_engine function to ensure proper logic and single point return.
+    return create_engine(DATABASE_URL)
+    # Create the engine only once and return it
+# This function has now been encapsulated correctly, removing redundant returns.
+    return create_engine(DATABASE_URL)
+
+    # Check if the database URL is set
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL not set")
+    # Create the engine only once and return it
+    return create_engine(DATABASE_URL)
+
+def get_engine():  
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
-    return create_engine(DATABASE_URL)
+    return create_engine(DATABASE_URL) # Avoid multiple calls to this function
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
     return create_engine(DATABASE_URL)
     return create_engine(DATABASE_URL)
     # return create_engine(DATABASE_URL)
-    Base.metadata.create_all(get_engine())
+    # Ensure we're calling get_engine properly without redundancy.
+Base.metadata.create_all(get_engine())
 
 class PasswordHistory(Base):
     __tablename__ = 'password_history'
@@ -138,7 +154,11 @@ Base.metadata.create_all(engine)
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
 # Create and configure the engine
+
+# Engine definition for database connection
 engine = create_engine(DATABASE_URL)
+# Create all tables in the engine. This will create the tables defined by Base's subclasses.
+Base.metadata.create_all(engine)
 
 # Create session makers
 Session = sessionmaker(bind=engine)
@@ -167,6 +187,18 @@ class Audit(Base):
     action = Column(String(255))
 
 # Create a configured "Session" class
+
+# Define user_profiles table
+class UserProfile(Base):
+    __tablename__ = 'user_profiles'
+    id = Column(Integer, Sequence('user_profile_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    phone = Column(String(20))
+    country = Column(String(50))
+    timezone = Column(String(50))
+    currency = Column(String(10))
+    profile_image = Column(String(255))
 
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
 Base.metadata.create_all(get_engine())
