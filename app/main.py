@@ -236,6 +236,22 @@ def verify_db_connection():
         return {'message': 'Database connectivity failed.', 'error': str(e)}, 500
 
 # Global middleware example
+from fastapi import HTTPException
+from sqlalchemy.orm import Session
+from database import get_db
+
+# Role verification middleware
+@app.middleware("http")
+async def role_verification(request: Request, call_next):
+    # Obtain the user's role from the request (assumes you have a way to extract user roles)
+    user_role = request.headers.get('X-User-Role')
+
+    # Placeholder for role checking logic
+    if user_role not in ['System Admin', 'Premium User', 'Basic User', 'Analyst']:
+        raise HTTPException(status_code=403, detail="Unauthorized access")
+
+    response = await call_next(request)
+    return response
 @app.middleware("http")
 async def custom_global_middleware(request: Request, call_next):
     # Log the request - this is the global middleware handling
