@@ -7,6 +7,8 @@ import os
 
 from alembic import context
 
+import sys
+sys.path.append("C:/My Drive/Projects/repo/my-test")
 from database import Base
 from database import User, Role, Permission, Audit
 
@@ -26,12 +28,16 @@ if config.config_file_name is not None:
 
 # Include the database engine in Alembic's context
 
+target_metadata = Base.metadata
+
 # The connection URL is fetched based on environment variables
 config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
 from database import Base
 
 # Ensure all necessary tables are included in the autogenerate process
 from database import Base, User, Role, Permission, Audit
+
+target_metadata = Base.metadata
 
 # The connection URL is fetched based on environment variables
 config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
@@ -45,7 +51,7 @@ config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql:/
 
 from database import Base, User, Role, Permission, Audit
 
- target_metadata = Base.metadata
+
 
 
 

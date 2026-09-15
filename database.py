@@ -7,8 +7,25 @@ from sqlalchemy.ext.declarative import declarative_base
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 def get_engine():  # Lazy connect to DB
-    if DATABASE_URL is None or DATABASE_URL == 'postgresql://username:password@localhost:5432/mydatabase':
-        raise ValueError('DATABASE_URL not set or incorrectly configured')
+    return create_engine(DATABASE_URL)
+    # return create_engine(DATABASE_URL)
+    Base.metadata.create_all(get_engine())
+
+class PasswordHistory(Base):
+    __tablename__ = 'password_history'
+    id = Column(Integer, Sequence('password_history_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    password_hash = Column(String(255))
+    created_at = Column(Integer)
+
+class LoginAttempt(Base):
+    __tablename__ = 'login_attempts'
+    id = Column(Integer, Sequence('login_attempt_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    timestamp = Column(Integer)
+    success = Column(Integer)
+#     if DATABASE_URL is None or DATABASE_URL == 'postgresql://username:password@localhost:5432/mydatabase':
+    raise ValueError('DATABASE_URL not set or incorrectly configured')
     
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
@@ -75,7 +92,7 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localho
 # Create an engine
 
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
-engine = get_engine()  # Ensure engine is defined before using
+# engine = get_engine()  # Ensure engine is defined before using
 Base.metadata.create_all(engine)
 engine = create_engine(DATABASE_URL)
 # Update the database URL with correct credentials
