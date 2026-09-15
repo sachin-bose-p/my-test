@@ -15,6 +15,29 @@ branch_labels = None
 depends_on = None
 
 def upgrade():
+    # Ensure tables are created correctly
+    op.create_table(
+        'users',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('username', sa.String(length=50), unique=True),
+        sa.Column('password', sa.String(length=50))
+    )
+    op.create_table(
+        'roles',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('role_name', sa.String(length=50), unique=True)
+    )
+    op.create_table(
+        'permissions',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('permission_name', sa.String(length=50), unique=True)
+    )
+    op.create_table(
+        'audit',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('action', sa.String(length=255))
+    )
+
     # Create tables
     op.create_table(
         'users',
