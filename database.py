@@ -11,28 +11,48 @@ def get_engine():  # Lazy connect to DB
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
+
+# Lazy connect to the database
+def get_engine():  # Lazy connect to DB
     # Ensure proper retrieval of DATABASE_URL
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    if not DATABASE_URL:
-        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL) # Remove redundant lines and fix indentation.
     # Ensure proper retrieval of DATABASE_URL
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    if not DATABASE_URL:
-        raise ValueError("DATABASE_URL not set")
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    if not DATABASE_URL:
-        raise ValueError("DATABASE_URL not set")
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    if not DATABASE_URL:
-        raise ValueError("DATABASE_URL not set")
-    return create_engine(DATABASE_URL)  # Fixed location for return statement  # Fixed return placement  # Fixed placement for returning the engine  # Fixed placement for returning the engine  # Fixed placement for returning the engine
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
     return create_engine(DATABASE_URL)
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")  # Fixed location for return statement  # Fixed return placement  # Fixed placement for returning the engine  # Fixed placement for returning the engine  # Fixed placement for returning the engine
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+#    return create_engine(DATABASE_URL)
 
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")

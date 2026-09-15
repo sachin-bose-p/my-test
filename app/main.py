@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 
+# Create FastAPI application instance
+app = FastAPI()
+
+
 app = FastAPI()
 
 # Configure logging
@@ -49,6 +53,20 @@ def health_check():
 # Additional API endpoints can be added below
 
 # Response Wrapper
+
+# Response Model for standardizing API responses
+class ResponseModel:
+    def __init__(self, data: any, message: str = None):
+        self.data = data
+        self.message = message
+        self.success = True
+
+    def to_dict(self):
+        return {
+            'success': self.success,
+            'message': self.message,
+            'data': self.data
+        }
 
 # Cleaned up duplicate ResponseModel class definitions
 
