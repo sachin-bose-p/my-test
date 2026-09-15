@@ -1,12 +1,68 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, Request
 
 # Create FastAPI application instance
 app = FastAPI()
 
+# Swagger endpoint for documentation
+# The OpenAPI documentation is served automatically by FastAPI at `/docs`
+# Redoc is also available at `/redoc`
+import logging
 
-app = FastAPI()
+import os
+from dotenv import load_dotenv
+load_dotenv() # Loading environment variables from .env file
 
-# Configure logging
+# Setting the default logging format for the application
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Logger instances for different logging purposes
+application_logger = logging.getLogger('application')
+application_logger.setLevel(logging.INFO)
+
+error_logger = logging.getLogger('error')
+error_logger.setLevel(logging.ERROR)
+
+error_handler = logging.FileHandler('error.log')
+error_handler.setLevel(logging.ERROR)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+error_handler.setFormatter(formatter)
+error_logger.addHandler(error_handler)
+
+
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse, FileResponse
+from pydantic import BaseModel
+
+# Pydantic model for response consistency
+class ResponseModel(BaseModel):
+    data: dict
+    message: str = "Operation successful"
+from fastapi.exception_handlers import http_exception_handler
+
+# Function to handle global exceptions
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    msg = f"Unexpected error: {exc}"
+    error_logger.error(msg)
+    return JSONResponse(status_code=500, content={"message": msg})
+
+# Response wrapper function
+
+# Modify the response wrapper function implementation if necessary for fixes
+
+def response_wrapper(data: dict, message: str = "Operation successful", status_code: int = 200):
+    # Properly handle data serialization and ensure compatibility without defaults
+    if not isinstance(data, dict):
+        raise ValueError("Provided data must be a dictionary type.")
+    return JSONResponse(content={"data": data, "message": message}, status_code=status_code)
+
+# Function to handle request validation errors
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    error_logger.error(f"Validation error: {exc}")
+    return response_wrapper({}, f"Validation error: {exc}", status_code=422)
+
 import logging
 from fastapi import Depends, Request
 
@@ -92,9 +148,12 @@ logging.basicConfig(level=logging.INFO)
 # Health check endpoint
 @app.get('/health')
 def health_check():
-    return {'status': 'healthy'}
+    """Health check endpoint returns application status"""
+    return response_wrapper({'status': 'healthy'}, "Health check successful")
 
-@app.get('/db-verify')
+# Ensure that the `/items/{item_id}` endpoint uses ResponseModel correctly
+# Updating handler to ensure compliance with FastAPI's response models
+@app.get('/items/{item_id}')
 def verify_db_connection():
     engine = get_engine()
     connection = engine.connect()
@@ -103,14 +162,15 @@ def verify_db_connection():
 
 @app.get('/db-verify')
 def verify_db_connection():
+    """Verify database connectivity through a basic engine connect/close"""
     try:
         engine = get_engine()
         connection = engine.connect()
         connection.close()
-        return {'message': 'Database connectivity successful!'}
+        return response_wrapper({'message': 'Database connectivity successful!'}, "DB verified")
     except Exception as e:
         error_logger.error(f'Database connectivity error: {e}')
-        return {'message': 'Database connectivity failed.', 'error': str(e)}, 500
+        return response_wrapper({'message': 'Database connectivity failed.', 'error': str(e)}, "DB verification failed."), 500
 @app.get('/health')
 def health_check():
     return {'status': 'healthy'}
@@ -142,12 +202,62 @@ def verify_db_connection():
 def health_check():
     return {'status': 'healthy'}
 
-# Middleware to log requests and responses
+# Create logger for application logs
+application_logger = logging.getLogger('application')
+application_logger.setLevel(logging.INFO)
+
+# Create logger for audit logs
+audit_logger = logging.getLogger('audit')
+audit_logger.setLevel(logging.INFO)
+
+# Create logger for security logs
+security_logger = logging.getLogger('security')
+security_logger.setLevel(logging.INFO)
+
+# Create logger for error logs
+error_logger = logging.getLogger('error')
+error_logger.setLevel(logging.ERROR)
+
+# Create logger for job logs
+job_logger = logging.getLogger('job')
+job_logger.setLevel(logging.INFO)
+
+# File handler for logging errors to file
+error_handler = logging.FileHandler('error.log')
+error_handler.setLevel(logging.ERROR)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+error_handler.setFormatter(formatter)
+error_logger.addHandler(error_handler)
+# Middleware to handle cross-cutting concerns
+import time
+
 @app.middleware("http")
-async def log_requests(request: Request, call_next):
-    audit_logger.info(f"Request {request.method} {request.url.path}")
+async def log_and_enhance_requests(request: Request, call_next):
+    # Example middleware: timing request processing
+    start_time = time.time()
+    application_logger.info(f"Received request: {request.method} {request.url}")
+    
+    # Continue processing the request
     response = await call_next(request)
-    audit_logger.info(f"Response status: {response.status_code}")
+    
+    # Enhance logging with request processing time
+    process_time = time.time() - start_time
+    application_logger.info(f"Processed request in {process_time:.2f} sec - Status: {response.status_code}")
+    
+    return response
+@app.middleware("http")
+async def log_and_enhance_requests(request: Request, call_next):
+    # Example middleware: timing request processing
+    start_time = time.time()
+    application_logger.info(f"Received request: {request.method} {request.url}")
+    
+    # Continue processing the request
+    response = await call_next(request)
+    
+    # Enhance logging with request processing time
+    process_time = time.time() - start_time
+    application_logger.info(f"Processed request in {process_time:.2f} sec - Status: {response.status_code}")
+    
     return response
 
 # Verify Database Connectivity
@@ -167,6 +277,11 @@ def verify_db_connection():
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from database import get_db
+
+# Example endpoint utilizing dependency injection
+@app.get("/items/{item_id}")
+def read_item(item_id: int, db: Session = Depends(get_db)):
+    return {"item_id": item_id, "db_status": "connected"}
 
 @app.get("/health")
 def health_check():
@@ -306,11 +421,17 @@ async def log_audit_event(event: dict):
     audit_logger.info(f'Audit event: {event}')
     return {'success': True, 'message': 'Audit log recorded'}
 
-# Response Wrapper
+# Example use of response wrapper in an endpoint
+@app.get('/items/{item_id}', response_model=None)
+def get_item(item_id: int):
+    """Example endpoint that uses the response wrapper"""
+    data = {"item_id": item_id, "name": "Example Item"}
+    return response_wrapper(data, "Item fetched successfully")
+
 def response_wrapper(data: any, message: str = None):
     return ResponseModel(data, message)
 # Example use of response wrapper in an endpoint
-@app.get('/items/{item_id}', response_model=ResponseModel)
+@app.get('/items/{item_id}')
 
 def response_wrapper(data: any, message: str = None):
     return ResponseModel(data, message)
