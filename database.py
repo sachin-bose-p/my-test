@@ -7,29 +7,44 @@ import logging
 from sqlalchemy.ext.declarative import declarative_base
 
 # Note: Database URL should be correctly configured in your .env file
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}')
 
 def get_engine():  # Lazy connect to DB
     # Set a default database URL for development/testing
-    default_url = 'postgresql://username:password@localhost:5432/mydatabase'
+    default_url = 'postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}'
     if not DATABASE_URL or DATABASE_URL == default_url:
-        logging.warning("DATABASE_URL not set or using the development default. Override this in production.")
-        return create_engine(default_url)
+        logging.error("DATABASE_URL is not correctly set. Please ensure all placeholders in your environment variables are replaced with actual values.")
+        raise ValueError("Improper configuration: Database connection cannot proceed with default placeholders.")
 
-    return create_engine(DATABASE_URL)
+    return create_engine(DATABASE_URL, pool_size=5, max_overflow=10)
 
 # Update the database URL with correct credentials
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
 Base = declarative_base()
 
+import bcrypt
+
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
     username = Column(String(50), unique=True)
-    password = Column(String(50))
+    password_hash = Column(String(128))
+
+    # Method to set (and hash) the user password
+    def set_password(self, password):
+        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+    # Method to check the user's password
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 
 # Removed duplicate Role class definition
+class Role(Base):
+    __tablename__ = 'roles'
+    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
+    role_name = Column(String(50), unique=True)
+
 
 # Removed duplicate Permission and Audit class definitions
 

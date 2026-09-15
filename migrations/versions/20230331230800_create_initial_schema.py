@@ -22,6 +22,12 @@ def upgrade():
         sa.Column('username', sa.String(length=50), unique=True),
         sa.Column('password', sa.String(length=50))
     )
+
+    # Create indexes on tables to improve query performance
+    op.create_index('idx_users_username', 'users', ['username'], unique=True)
+    op.create_index('idx_roles_role_name', 'roles', ['role_name'], unique=True)
+    op.create_index('idx_permissions_permission_name', 'permissions', ['permission_name'], unique=True)
+    op.create_index('idx_audit_action', 'audit', ['action'])
     op.create_table(
         'roles',
         sa.Column('id', sa.Integer, primary_key=True),

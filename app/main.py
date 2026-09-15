@@ -117,6 +117,22 @@ async def log_requests(request: Request, call_next):
     audit_logger.info(f"Response status: {response.status_code}")
     return response
 
+
+# Route for triggering audit logging
+@app.post('/audit-log')
+async def log_audit_event(request: Request, db: Session = Depends(get_db)):
+    """Endpoint to log audit events into the database"""
+    try:
+        event_data = await request.json()
+        event = Audit(action=event_data.get('action'))
+        db.add(event)
+        db.commit()
+        audit_logger.info(f"Audit event logged: {event.action}")
+        return response_wrapper({'message': 'Audit event logged successfully'})
+    except Exception as e:
+        error_logger.error(f"Failed to log audit event: {e}")
+        return response_wrapper({'message': 'Failed to log audit event.', 'error': str(e)}, status_code=500)
+
 # Import FastAPI for the React application
 import os
 

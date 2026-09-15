@@ -37,7 +37,7 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 # The connection URL is fetched based on environment variables
-config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
+config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', DATABASE_URL))
 from database import Base
 
 # Ensure all necessary tables are included in the autogenerate process
