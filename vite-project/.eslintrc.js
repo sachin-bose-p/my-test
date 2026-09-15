@@ -1,8 +1,12 @@
 module.exports = {
-  languageOptions: {
+  "languageOptions": {
+    ecmaVersion: 2021,
+    sourceType: "module",
     globals: {
-      window: true,
-      process: true,
+      window: "readonly",
+      process: "readonly",
+      console: "readonly",
+      browser: "readonly"
     },
   },
   overrides: [
@@ -13,17 +17,17 @@ module.exports = {
       },
     },
   ],
-  // env: {
   languageOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
     globals: {
-      window: true,
-      process: true,
+      window: "readonly",
+      process: "readonly",
+      console: "readonly",
+      browser: "readonly"
     },
   },
-  env: {
-    browser: true,
-    es2021: true,
-  },
+
   extends: [
   'eslint:recommended',
   'plugin:react/recommended',
@@ -36,13 +40,14 @@ module.exports = {
     },
   },
   // Add custom rules here
-  ]
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
   ],
   parser: '@typescript-eslint/parser',
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

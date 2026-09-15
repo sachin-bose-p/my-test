@@ -1,5 +1,12 @@
 {
+  "scripts": {
+    "lint": "eslint .",
+    "build": "vite build"
+  },
   "dependencies": {
     "react-router-dom": "^7.18.3"
+  },
+  "devDependencies": {
+    "eslint": "^10.10.0"
   }
 }

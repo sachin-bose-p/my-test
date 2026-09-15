@@ -7,41 +7,52 @@ import { Provider } from 'react-redux';
 import store from './store';
 import AppRoutes from './routes/index';
 
-// Wrap the main application with the Redux Provider
+// Simplify into a single App component with correct JSX
 const App = () => (
   <Provider store={store}>
     <AppRoutes />
-    <section id="center">
-      <div class="hero">
-        <img src={`${heroImg}`} class="base" width="170" height="179">
-        <img src={`${typescriptLogo}`} class="framework" alt="TypeScript logo"/>
-        <img src={`${viteLogo}`} class="vite" alt="Vite logo" />
-      </div>
-      <div>
-        <h1>Get started</h1>
-        <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-      </div>
-      <button id="counter" type="button" class="counter"></button>
-    </section>
+    <MainSection />
   </Provider>
 );
 
-// Wrap the main application with the Redux Provider
-const App = () => (
-  <Provider store={store}> 
-    <section id="center">
-      <div class="hero">
-        <img src="${heroImg}" class="base" width="170" height="179">
-        <img src="${typescriptLogo}" class="framework" alt="TypeScript logo"/>
-        <img src="${viteLogo}" class="vite" alt="Vite logo" />
-      </div>
-      <div>
-        <h1>Get started</h1>
-        <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-      </div>
-      <button id="counter" type="button" class="counter"></button>
-    </section>
+// Correcting the duplicate App component definition and JSX placement
+const App: React.FC = () => (
+  <Provider store={store}>
+    <AppRoutes />
   </Provider>
+);
+
+
+const MainSection: React.FC = () => (
+  <section id="center">
+    <div className="hero">
+      <img src={heroImg} className="base" width="170" height="179" alt="Hero" />
+      <img src={typescriptLogo} className="framework" alt="TypeScript logo" />
+      <img src={viteLogo} className="vite" alt="Vite logo" />
+    </div>
+    <div>
+      <h1>Get started</h1>
+      <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
+    </div>
+    <button id="counter" type="button" className="counter">Count</button>
+  </section>
+);
+
+setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+
+const MainSection = () => (
+  <section id="center">
+    <div className="hero">
+      <img src={heroImg} className="base" width="170" height="179" />
+      <img src={typescriptLogo} className="framework" alt="TypeScript logo" />
+      <img src={viteLogo} className="vite" alt="Vite logo" />
+    </div>
+    <div>
+      <h1>Get started</h1>
+      <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
+    </div>
+    <button id="counter" type="button" className="counter"></button>
+  </section>
 );
 
 

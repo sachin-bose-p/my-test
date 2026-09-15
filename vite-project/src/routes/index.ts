@@ -8,7 +8,7 @@ import About from '../pages/About';
 const AppRoutes = () => {
   // this is a placeholder comment to indicate component structure
   // Add other page routes here as needed
-
+  // Ensure JSX structures and elements are correctly formed
   return (
     <Router>
       <Routes>
