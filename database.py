@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
 Base = declarative_base()
 
@@ -29,9 +30,41 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localho
 
 # Create an engine
 engine = create_engine(DATABASE_URL)
+# Update the database URL with correct credentials
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://your_username:your_password@localhost:5432/mydatabase')
 
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
 Base.metadata.create_all(engine)
+
+# Database connection URL
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
+
+# Create and configure the engine
+engine = create_engine(DATABASE_URL)
+
+# Create session makers
+Session = sessionmaker(bind=engine)
+
+# Function to get a new session
+
+def get_session():
+    return Session()
+
+# Define Role, Permission, and Audit tables
+class Role(Base):
+    __tablename__ = 'roles'
+    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
+    role_name = Column(String(50), unique=True)
+
+class Permission(Base):
+    __tablename__ = 'permissions'
+    id = Column(Integer, Sequence('permission_id_seq'), primary_key=True)
+    permission_name = Column(String(50), unique=True)
+
+class Audit(Base):
+    __tablename__ = 'audit'
+    id = Column(Integer, Sequence('audit_id_seq'), primary_key=True)
+    action = Column(String(255))
 
 # Create a configured "Session" class
 database_session = sessionmaker(bind=engine)

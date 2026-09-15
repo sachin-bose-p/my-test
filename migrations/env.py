@@ -20,6 +20,14 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from database import Base
 
+# Ensure all necessary tables are included in the autogenerate process
+from database import User, Role, Permission, Audit
+
+# Include the database engine in Alembic's context
+
+# The connection URL is fetched based on environment variables
+config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
