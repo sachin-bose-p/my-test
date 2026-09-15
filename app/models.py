@@ -2,16 +2,11 @@ from sqlalchemy import Column, Integer, String, Sequence
 from database import Base
 
 class User(Base):
+    __table_args__ = {'extend_existing': True}
     __tablename__ = 'users'
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
-    username = Column(String(50), unique=True)
-    password = Column(String(255))  # Increased to accommodate hashed password
-
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
-    username = Column(String(50), unique=True)
-    password = Column(String(255))  # Increased to accommodate hashed password
+    username = Column(String(50), unique=True, extend_existing=True)
+    hashed_password = Column(String(255))  # Should store the hashed password
 
 class UserSession(Base):
     __tablename__ = 'user_sessions'
