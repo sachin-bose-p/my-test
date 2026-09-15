@@ -3,7 +3,9 @@ import os
 
 from sqlalchemy.ext.declarative import declarative_base
 
-# Note: Database URL should be correctly configured in your .env file
+# Note: Database URL should be correctly configured in your .env file.
+
+# Fixed implementation of get_engine function.
 
 # Lazy connect to the database
 def get_engine():  # Lazy connect to DB
@@ -19,7 +21,8 @@ def get_engine():  # Lazy connect to DB
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set")
-    return create_engine(DATABASE_URL) # Remove redundant lines and fix indentation.
+    # Removed redundant lines and fixed indentation.
+    return create_engine(DATABASE_URL)
     # Ensure proper retrieval of DATABASE_URL
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
@@ -199,6 +202,13 @@ class Audit(Base):
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
+def get_engine():  # Lazy connect to DB
+    # Ensure proper retrieval of DATABASE_URL
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
 import os
 
 Base = declarative_base()

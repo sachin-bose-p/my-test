@@ -9,12 +9,54 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
+
+# Ensure correct indentation throughout.
 revision = '20230331230800'
 down_revision = None
 branch_labels = None
 depends_on = None
 
 def upgrade():
+    # Create tables
+    op.create_table(
+        'user_roles',
+        sa.Column('user_id', sa.Integer, sa.ForeignKey('users.id'), primary_key=True),
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True)
+    )
+    op.create_table(
+        'users',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('username', sa.String(length=50), unique=True),
+        sa.Column('password', sa.String(length=50))
+    )
+    op.create_table(
+        'roles',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('role_name', sa.String(length=50), unique=True)
+    )
+    # Create tables
+    op.create_table(
+        'user_roles',
+        sa.Column('user_id', sa.Integer, sa.ForeignKey('users.id'), primary_key=True),
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True)
+    )
+    op.create_table(
+        'users',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('username', sa.String(length=50), unique=True),
+        sa.Column('password', sa.String(length=50))
+    )
+    op.create_table(
+        'roles',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('role_name', sa.String(length=50), unique=True)
+    )
+    op.create_table(
+        'user_roles',
+        sa.Column('user_id', sa.Integer, sa.ForeignKey('users.id'), primary_key=True),
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True)
+    )
+
     # Create tables
     op.create_table(
         'user_roles',
@@ -62,6 +104,13 @@ def upgrade():
     )
 
 def downgrade():
+    op.drop_table('user_roles')
+    op.drop_table('users')
+    op.drop_table('roles')
+    op.drop_table('permissions')
+    op.drop_table('role_permissions')
+    op.drop_table('audit')
+
     # Drop tables
     op.drop_table('users')
     op.drop_table('roles')
