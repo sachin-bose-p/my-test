@@ -3,10 +3,21 @@ import os
 
 from sqlalchemy.ext.declarative import declarative_base
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
+# Note: Database URL should be correctly configured in your .env file
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-def get_engine():
+def get_engine():  # Lazy connect to DB
+    if DATABASE_URL is None or DATABASE_URL == 'postgresql://username:password@localhost:5432/mydatabase':
+        raise ValueError('DATABASE_URL not set or incorrectly configured')
+    
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+        raise ValueError("DATABASE_URL not set")
     return create_engine(DATABASE_URL)
+    return create_engine(DATABASE_URL)
+
+# Update the database URL with correct credentials
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase')
 
 Base = declarative_base()
 
@@ -64,6 +75,7 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://username:password@localho
 # Create an engine
 
 # Create all tables in the engine. This will create the tables defined by Base's subclasses.
+engine = get_engine()  # Ensure engine is defined before using
 Base.metadata.create_all(engine)
 engine = create_engine(DATABASE_URL)
 # Update the database URL with correct credentials

@@ -45,7 +45,10 @@ config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql:/
 
 from database import Base, User, Role, Permission, Audit
 
-target_metadata = Base.metadata
+ target_metadata = Base.metadata
+
+
+
 
 from database import User, Role, Permission, Audit
 
