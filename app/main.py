@@ -6,6 +6,9 @@ app = FastAPI()
 import logging
 from fastapi import Depends, Request
 
+# Import FastAPI for the React application
+import os
+
 # Load environment variables from .env file
 from dotenv import load_dotenv
 

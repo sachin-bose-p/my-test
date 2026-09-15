@@ -1,0 +1,27 @@
+{
+  "name": "vite-project",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "redux": "latest",
+    "@reduxjs/toolkit": "latest",
+    "axios": "latest",
+    "zod": "latest",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest",
+    "eslint": "latest",
+    "prettier": "latest",
+    "husky": "latest",
+    "commitlint": "latest"
+  }
+}
