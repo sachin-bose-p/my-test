@@ -15,6 +15,12 @@ class User(Base):
 
 class UserSession(Base):
     __tablename__ = 'user_sessions'
+    id = Column(Integer, Sequence('session_id_seq'), primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    session_token = Column(String(255), nullable=False)
+    expiration = Column(Integer, nullable=False)
+
+    __tablename__ = 'user_sessions'
     id = Column(Integer, Sequence('user_session_id_seq'), primary_key=True)
     user_id = Column(Integer)
     session_token = Column(String(255))
