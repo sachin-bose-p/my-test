@@ -3,7 +3,12 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
+import os
+
 from alembic import context
+
+from database import Base
+from database import User, Role, Permission, Audit
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -18,17 +23,31 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+
+# Include the database engine in Alembic's context
+
+# The connection URL is fetched based on environment variables
+config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
 from database import Base
 
 # Ensure all necessary tables are included in the autogenerate process
-from database import User, Role, Permission, Audit
+from database import Base, User, Role, Permission, Audit
+
+# The connection URL is fetched based on environment variables
+config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
+# Ensure all necessary tables are included in the autogenerate process
+from database import Base, User, Role, Permission, Audit
 
 # Include the database engine in Alembic's context
 
 # The connection URL is fetched based on environment variables
 config.set_main_option('sqlalchemy.url', os.getenv('DATABASE_URL', 'postgresql://username:password@localhost:5432/mydatabase'))
 
+from database import Base, User, Role, Permission, Audit
+
 target_metadata = Base.metadata
+
+from database import User, Role, Permission, Audit
 
 # Ensure all necessary tables are included in the autogenerate process
 from database import User, Role, Permission, Audit
