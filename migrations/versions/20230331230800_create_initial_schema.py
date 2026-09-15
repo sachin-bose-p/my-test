@@ -17,6 +17,11 @@ depends_on = None
 def upgrade():
     # Create tables
     op.create_table(
+        'user_roles',
+        sa.Column('user_id', sa.Integer, sa.ForeignKey('users.id'), primary_key=True),
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True)
+    )
+    op.create_table(
         'users',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('username', sa.String(length=50), unique=True),
@@ -29,6 +34,24 @@ def upgrade():
     )
     op.create_table(
         'permissions',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('permission_name', sa.String(length=50), unique=True)
+    )
+    op.create_table(
+        'role_permissions',
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True),
+        sa.Column('permission_id', sa.Integer, sa.ForeignKey('permissions.id'), primary_key=True)
+    )
+    op.create_table(
+        'permissions',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('permission_name', sa.String(length=50), unique=True)
+    )
+    op.create_table(
+        'role_permissions',
+        sa.Column('role_id', sa.Integer, sa.ForeignKey('roles.id'), primary_key=True),
+        sa.Column('permission_id', sa.Integer, sa.ForeignKey('permissions.id'), primary_key=True)
+    )
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('permission_name', sa.String(length=50), unique=True)
     )

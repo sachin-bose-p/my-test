@@ -7,11 +7,44 @@ from sqlalchemy.ext.declarative import declarative_base
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 def get_engine():  # Lazy connect to DB
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
+    if not DATABASE_URL:
+        raise ValueError("DATABASE_URL not set")
+    return create_engine(DATABASE_URL)
     return create_engine(DATABASE_URL)
     # return create_engine(DATABASE_URL)
     Base.metadata.create_all(get_engine())
 
 class PasswordHistory(Base):
+    __tablename__ = 'password_history'
+    id = Column(Integer, Sequence('password_history_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    password_hash = Column(String(255))
+    created_at = Column(Integer)
+
+class LoginAttempt(Base):
+    __tablename__ = 'login_attempts'
+    id = Column(Integer, Sequence('login_attempt_id_seq'), primary_key=True)
+    user_id = Column(Integer)
+    timestamp = Column(Integer)
+    success = Column(Integer)
+
+class Role(Base):
+    __tablename__ = 'roles'
+    id = Column(Integer, Sequence('role_id_seq'), primary_key=True)
+    role_name = Column(String(50), unique=True)
+
+class Permission(Base):
+    __tablename__ = 'permissions'
+    id = Column(Integer, Sequence('permission_id_seq'), primary_key=True)
+    permission_name = Column(String(50), unique=True)
+
+class RolePermission(Base):
+    __tablename__ = 'role_permissions'
+    role_id = Column(Integer, sa.ForeignKey('roles.id'), primary_key=True)
+    permission_id = Column(Integer, sa.ForeignKey('permissions.id'), primary_key=True)
     __tablename__ = 'password_history'
     id = Column(Integer, Sequence('password_history_id_seq'), primary_key=True)
     user_id = Column(Integer)
@@ -135,8 +168,8 @@ class Audit(Base):
 
 # Create a configured "Session" class
 
-# Create all tables after defining models
-Base.metadata.create_all(engine)
+# Create all tables in the engine. This will create the tables defined by Base's subclasses.
+Base.metadata.create_all(get_engine())
 database_session = sessionmaker(bind=engine)
 
 # Create a Session
