@@ -437,6 +437,97 @@
 
       <div class="stats-grid">
         <div class="stat-card">
+    <!-- Yearly Sales Report Pie Chart Section -->
+    <div id="yearly-sales-report" class="stat-card">
+      <h3>Yearly Sales Report</h3>
+      <canvas id="salesPieChart" aria-label="Yearly Sales Distribution" role="img"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('salesPieChart').getContext('2d');
+      const data = {
+      labels: ['Electronics', 'Fashion', 'Home & Living', 'Groceries', 'Others'],
+      datasets: [{
+        data: [300, 500, 100, 200, 400],
+        backgroundColor: [
+          '#3b82f6',  // primary color
+          '#ef4444',  // red tone
+          '#f97316',  // orange tone
+          '#10b981',  // green tone
+          '#6366f1'   // indigo tone
+        ],
+        borderWidth: 1,
+        borderColor: '#ffffff'
+      }]
+    };
+
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const currentValue = context.raw;
+                const percentage = ((currentValue/context.dataset.data.reduce((a, b) => a + b)) * 100).toFixed(2);
+                return `${label}: ${currentValue} (${percentage}%)`;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const salesPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Electronics', 'Fashion', 'Home & Living', 'Groceries', 'Others'],
+          datasets: [{
+            label: 'Sales Distribution',
+            data: [300, 500, 200, 150, 100], // Sample data
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  let label = context.label || '';
+                  if (label) {
+                      label += ': ';
+                  }
+                  label += context.raw;
+                  return label;
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
           <h3>Total Users</h3>
           <div class="value">24,592</div>
         </div>
