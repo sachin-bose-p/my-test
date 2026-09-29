@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Full Admin Dashboard Template</title>
+  <title>Dashboard with Sidebar & Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
   <style>
     :root {
       --sidebar-width: 280px;
-      --topbar-height: 70px;
       --bg-main: #f1f5f9;
       --sidebar-bg: #1e293b;
       --sidebar-text: #94a3b8;
@@ -20,9 +19,8 @@
       --card-bg: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --primary: #3b82f6;
-      --primary-hover: #2563eb;
       --border-color: #e2e8f0;
+      --success: #10b981;
     }
 
     * {
@@ -37,7 +35,6 @@
       color: var(--text-main);
       display: flex;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     /* --- SIDEBAR --- */
@@ -52,11 +49,11 @@
       display: flex;
       flex-direction: column;
       z-index: 100;
-      box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
     }
 
     .sidebar-brand {
-      height: var(--topbar-height);
+      height: 70px;
       display: flex;
       align-items: center;
       padding: 0 24px;
@@ -89,7 +86,6 @@
       font-weight: 600;
     }
 
-    /* Navigation Links & Dropdowns */
     ul {
       list-style: none;
     }
@@ -124,7 +120,6 @@
       gap: 12px;
     }
 
-    /* Arrow indicators */
     .arrow {
       width: 14px;
       height: 14px;
@@ -135,7 +130,6 @@
       transform: rotate(90deg);
     }
 
-    /* Submenu styling (Level 2 & Level 3) */
     .sub-menu {
       max-height: 0;
       overflow: hidden;
@@ -144,7 +138,7 @@
     }
 
     .menu-item.open > .sub-menu {
-      max-height: 1000px; /* Expands to fit children */
+      max-height: 1000px;
       transition: max-height 0.4s ease-in;
     }
 
@@ -153,125 +147,11 @@
       font-size: 13px;
     }
 
-    /* --- MAIN CONTENT WRAPPER --- */
-    .main-wrapper {
+    /* --- CONTENT AREA --- */
+    main {
       margin-left: var(--sidebar-width);
       flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* --- TOP BAR --- */
-    header {
-      height: var(--topbar-height);
-      background-color: var(--card-bg);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      position: sticky;
-      top: 0;
-      z-index: 99;
-    }
-
-    .search-bar input {
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-      width: 300px;
-      font-size: 14px;
-      outline: none;
-      background: var(--bg-main);
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    /* Profile Icon / Dropdown Container */
-    .profile-dropdown {
-      position: relative;
-      cursor: pointer;
-    }
-
-    .profile-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .profile-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--border-color);
-    }
-
-    .profile-info {
-      text-align: left;
-    }
-
-    .profile-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .profile-role {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Profile Dropdown Menu Box */
-    .profile-menu-box {
-      position: absolute;
-      right: 0;
-      top: 55px;
-      width: 200px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 1000;
-    }
-
-    .profile-menu-box.show {
-      display: flex;
-    }
-
-    .profile-menu-box a {
-      padding: 10px 16px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 13px;
-      border-bottom: 1px solid var(--border-color);
-      transition: background 0.2s;
-    }
-
-    .profile-menu-box a:last-child {
-      border-bottom: none;
-      color: #dc2626;
-    }
-
-    .profile-menu-box a:hover {
-      background-color: var(--bg-main);
-    }
-
-    /* --- DASHBOARD VIEW AREA --- */
-    .content {
       padding: 32px;
-      flex: 1;
     }
 
     .page-title {
@@ -284,7 +164,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
-      margin-bottom: 30px;
     }
 
     .stat-card {
@@ -292,7 +171,7 @@
       padding: 24px;
       border-radius: 12px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .stat-card h3 {
@@ -308,23 +187,17 @@
       color: var(--text-main);
     }
 
-    .placeholder-content {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 40px;
-      text-align: center;
-      color: var(--text-muted);
+    .stat-card .value.success {
+      color: var(--success);
     }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar -->
   <aside>
-    <div class="sidebar-brand">
-      Smape Admin
-    </div>
-    
+    <div class="sidebar-brand">Smape Admin</div>
+
     <div class="sidebar-menu">
       <div class="menu-category">Main Navigation</div>
       <ul>
@@ -346,9 +219,7 @@
             <svg class="arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
           <ul class="sub-menu">
-            <li class="menu-item">
-              <a href="#" class="menu-link">All Users</a>
-            </li>
+            <li class="menu-item"><a href="#" class="menu-link">All Users</a></li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link" onclick="toggleSubMenu(this)">
                 <span>Roles & Permissions</span>
@@ -356,7 +227,7 @@
               </a>
               <ul class="sub-menu">
                 <li class="menu-item"><a href="#" class="menu-link">Admin Roles</a></li>
-                <li class="menu-item"><a href="/client_roles.html" class="menu-link">Client Roles</a></li>
+                <li class="menu-item"><a href="#" class="menu-link">Client Roles</a></li>
                 <li class="menu-item"><a href="#" class="menu-link">Custom Policies</a></li>
               </ul>
             </li>
@@ -405,173 +276,32 @@
     </div>
   </aside>
 
-  <div class="main-wrapper">
-    
-    <header>
-      <div class="search-bar">
-        <input type="text" placeholder="Search menu, users, reports..." />
+  <!-- Main Content Area -->
+  <main>
+    <h1 class="page-title">Dashboard Overview</h1>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Users</h3>
+        <div class="value">24,592</div>
       </div>
 
-      <div class="topbar-right">
-        <div class="profile-dropdown">
-          <button class="profile-btn" onclick="toggleProfileMenu()">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Avatar" class="profile-avatar" />
-            <div class="profile-info">
-              <div class="profile-name">Jane Doe</div>
-              <div class="profile-role">Administrator</div>
-            </div>
-          </button>
-
-          <div class="profile-menu-box" id="profileMenu">
-            <a href="#">My Profile</a>
-            <a href="#">Account Settings</a>
-            <a href="#">Billing Info</a>
-            <a href="#" onclick="logout()">Log Out</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <div class="content">
-      <h1 class="page-title">Dashboard Overview</h1>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-    <!-- Yearly Sales Report Pie Chart Section -->
-    <div id="yearly-sales-report" class="stat-card">
-      <h3>Yearly Sales Report</h3>
-      <canvas id="salesPieChart" aria-label="Yearly Sales Distribution" role="img"></canvas>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      const ctx = document.getElementById('salesPieChart').getContext('2d');
-      const data = {
-      labels: ['Electronics', 'Fashion', 'Home & Living', 'Groceries', 'Others'],
-      datasets: [{
-        data: [300, 500, 100, 200, 400],
-        backgroundColor: [
-          '#3b82f6',  // primary color
-          '#ef4444',  // red tone
-          '#f97316',  // orange tone
-          '#10b981',  // green tone
-          '#6366f1'   // indigo tone
-        ],
-        borderWidth: 1,
-        borderColor: '#ffffff'
-      }]
-    };
-
-    const config = {
-      type: 'pie',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                const label = context.label || '';
-                const currentValue = context.raw;
-                const percentage = ((currentValue/context.dataset.data.reduce((a, b) => a + b)) * 100).toFixed(2);
-                return `${label}: ${currentValue} (${percentage}%)`;
-              }
-            }
-          }
-        }
-      }
-    };
-
-    const salesPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ['Electronics', 'Fashion', 'Home & Living', 'Groceries', 'Others'],
-          datasets: [{
-            label: 'Sales Distribution',
-            data: [300, 500, 200, 150, 100], // Sample data
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  let label = context.label || '';
-                  if (label) {
-                      label += ': ';
-                  }
-                  label += context.raw;
-                  return label;
-                }
-              }
-            }
-          }
-        }
-      });
-    </script>
-          <h3>Total Users</h3>
-          <div class="value">24,592</div>
-        </div>
-        <div class="stat-card">
-          <h3>Active Sessions</h3>
-          <div class="value">1,420</div>
-        </div>
-        <div class="stat-card">
-          <h3>System Health</h3>
-          <div class="value" style="color: #10b981;">99.8%</div>
-        </div>
+      <div class="stat-card">
+        <h3>Active Sessions</h3>
+        <div class="value">1,420</div>
       </div>
 
-      <div class="placeholder-content">
-        <p>Select any item from the left-hand menu bar (including multi-level items like User Management -> Roles & Permissions) to view nested menus, or click your profile icon on the top right.</p>
+      <div class="stat-card">
+        <h3>System Health</h3>
+        <div class="value success">99.8%</div>
       </div>
     </div>
-
-  </div>
+  </main>
 
   <script>
-    // Toggle multi-level dropdowns in the sidebar
     function toggleSubMenu(element) {
       const parentLi = element.parentElement;
       parentLi.classList.toggle('open');
-    }
-
-    // Toggle top-right profile dropdown menu
-    function toggleProfileMenu() {
-      const menu = document.getElementById('profileMenu');
-      menu.classList.toggle('show');
-    }
-
-    // Close profile dropdown when clicking outside
-    window.addEventListener('click', function(e) {
-      const dropdown = document.querySelector('.profile-dropdown');
-      const menu = document.getElementById('profileMenu');
-      if (!dropdown.contains(e.target)) {
-        menu.classList.remove('show');
-      }
-    });
-
-    function logout() {
-      alert('Logged out successfully!');
     }
   </script>
 </body>
