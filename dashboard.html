@@ -192,6 +192,28 @@
       color: var(--success);
     }
 
+    /* --- RECENT TRANSACTIONS --- */
+    .transactions-section {
+      margin-top: 24px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .transactions-section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .transactions-empty-state {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
     /* --- YEARLY SALES REPORT --- */
     .sales-report {
       margin-top: 24px;
@@ -312,6 +334,10 @@
     @media (max-width: 700px) {
       main {
         padding: 24px 16px;
+      }
+
+      .transactions-section {
+        padding: 20px 16px;
       }
 
       .sales-report {
@@ -451,6 +477,11 @@
         <div class="value success">99.8%</div>
       </div>
     </div>
+
+    <section class="transactions-section" aria-labelledby="recent-transactions-title">
+      <h2 id="recent-transactions-title">Recent Transactions</h2>
+      <p class="transactions-empty-state">Recent transaction data is not available in this demo.</p>
+    </section>
 
     <section class="sales-report" aria-labelledby="yearly-sales-title">
       <div class="sales-report-header">
