@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard with Sidebar & Cards</title>
+  <title>Dashboard with Sidebar &amp; Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -152,6 +152,7 @@
       margin-left: var(--sidebar-width);
       flex: 1;
       padding: 32px;
+      min-width: 0;
     }
 
     .page-title {
@@ -190,6 +191,160 @@
     .stat-card .value.success {
       color: var(--success);
     }
+
+    /* --- YEARLY SALES REPORT --- */
+    .sales-report {
+      margin-top: 24px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      min-width: 0;
+    }
+
+    .sales-report-header {
+      margin-bottom: 20px;
+    }
+
+    .sales-report-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .sales-report-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .sales-report-content {
+      display: grid;
+      grid-template-columns: minmax(200px, 1fr) minmax(0, 1.4fr);
+      align-items: center;
+      gap: 32px;
+    }
+
+    .sales-chart {
+      width: min(100%, 260px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      justify-self: center;
+      background: conic-gradient(
+        #3b82f6 0% 35%,
+        #10b981 35% 60%,
+        #f59e0b 60% 78%,
+        #8b5cf6 78% 90%,
+        #64748b 90% 100%
+      );
+      box-shadow: inset 0 0 0 1px rgba(30, 41, 59, 0.08);
+    }
+
+    .sales-legend {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .sales-legend-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+
+    .sales-legend-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .sales-category {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-weight: 500;
+    }
+
+    .sales-category-name {
+      overflow-wrap: anywhere;
+    }
+
+    .sales-color {
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+      border-radius: 3px;
+    }
+
+    .sales-amount {
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sales-percentage {
+      min-width: 42px;
+      text-align: right;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sales-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .sales-total-amount {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        padding: 24px 16px;
+      }
+
+      .sales-report {
+        padding: 20px 16px;
+      }
+
+      .sales-report-content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      .sales-chart {
+        width: min(70vw, 240px);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .sales-legend-item {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+      }
+
+      .sales-amount {
+        grid-column: 1;
+        padding-left: 20px;
+        font-size: 13px;
+      }
+
+      .sales-percentage {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+    }
   </style>
 </head>
 <body>
@@ -222,7 +377,7 @@
             <li class="menu-item"><a href="#" class="menu-link">All Users</a></li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link" onclick="toggleSubMenu(this)">
-                <span>Roles & Permissions</span>
+                <span>Roles &amp; Permissions</span>
                 <svg class="arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <ul class="sub-menu">
@@ -251,7 +406,7 @@
               </a>
               <ul class="sub-menu">
                 <li class="menu-item"><a href="#" class="menu-link">Categories Setup</a></li>
-                <li class="menu-item"><a href="#" class="menu-link">Attributes & Tags</a></li>
+                <li class="menu-item"><a href="#" class="menu-link">Attributes &amp; Tags</a></li>
               </ul>
             </li>
             <li class="menu-item"><a href="#" class="menu-link">Product Inventory</a></li>
@@ -296,6 +451,76 @@
         <div class="value success">99.8%</div>
       </div>
     </div>
+
+    <section class="sales-report" aria-labelledby="yearly-sales-title">
+      <div class="sales-report-header">
+        <h2 id="yearly-sales-title">Yearly Sales Report</h2>
+        <p class="sales-report-note">Temporary sample/test data for demonstration only; these values are not connected to live sales data.</p>
+      </div>
+
+      <div class="sales-report-content">
+        <div>
+          <h3 style="font-size: 14px; font-weight: 600; text-align: center; margin-bottom: 16px;">Yearly Sales Distribution</h3>
+          <div
+            class="sales-chart"
+            role="img"
+            aria-label="Pie chart showing yearly sales distribution: Electronics 35 percent, Fashion 25 percent, Home and Living 18 percent, Groceries 12 percent, Others 10 percent."
+          ></div>
+        </div>
+
+        <div class="sales-legend" aria-label="Yearly sales distribution data">
+          <div class="sales-legend-item">
+            <div class="sales-category">
+              <span class="sales-color" style="background-color: #3b82f6;" aria-hidden="true"></span>
+              <span class="sales-category-name">Electronics</span>
+            </div>
+            <span class="sales-amount">$35,000</span>
+            <span class="sales-percentage">35%</span>
+          </div>
+
+          <div class="sales-legend-item">
+            <div class="sales-category">
+              <span class="sales-color" style="background-color: #10b981;" aria-hidden="true"></span>
+              <span class="sales-category-name">Fashion</span>
+            </div>
+            <span class="sales-amount">$25,000</span>
+            <span class="sales-percentage">25%</span>
+          </div>
+
+          <div class="sales-legend-item">
+            <div class="sales-category">
+              <span class="sales-color" style="background-color: #f59e0b;" aria-hidden="true"></span>
+              <span class="sales-category-name">Home &amp; Living</span>
+            </div>
+            <span class="sales-amount">$18,000</span>
+            <span class="sales-percentage">18%</span>
+          </div>
+
+          <div class="sales-legend-item">
+            <div class="sales-category">
+              <span class="sales-color" style="background-color: #8b5cf6;" aria-hidden="true"></span>
+              <span class="sales-category-name">Groceries</span>
+            </div>
+            <span class="sales-amount">$12,000</span>
+            <span class="sales-percentage">12%</span>
+          </div>
+
+          <div class="sales-legend-item">
+            <div class="sales-category">
+              <span class="sales-color" style="background-color: #64748b;" aria-hidden="true"></span>
+              <span class="sales-category-name">Others</span>
+            </div>
+            <span class="sales-amount">$10,000</span>
+            <span class="sales-percentage">10%</span>
+          </div>
+
+          <div class="sales-total">
+            <span>Total sample sales</span>
+            <span class="sales-total-amount">$100,000 · 100%</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
