@@ -208,10 +208,110 @@
       margin-bottom: 12px;
     }
 
-    .transactions-empty-state {
+    .transactions-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .transactions-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .transactions-table th,
+    .transactions-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    .transactions-table th {
+      background: #f8fafc;
       color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .transactions-table tbody tr {
+      transition: background-color 0.15s ease;
+    }
+
+    .transactions-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .transactions-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .transaction-id,
+    .transaction-date,
+    .transaction-amount {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .transaction-id,
+    .transaction-amount {
+      font-weight: 600;
+    }
+
+    .transaction-customer {
+      display: grid;
+      gap: 3px;
+    }
+
+    .transaction-email {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .transactions-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 16px;
+    }
+
+    .transactions-footer a {
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .transactions-footer a:hover {
+      text-decoration: underline;
     }
 
     /* --- YEARLY SALES REPORT --- */
@@ -480,7 +580,59 @@
 
     <section class="transactions-section" aria-labelledby="recent-transactions-title">
       <h2 id="recent-transactions-title">Recent Transactions</h2>
-      <p class="transactions-empty-state">Recent transaction data is not available in this demo.</p>
+      <div class="transactions-table-wrapper">
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th scope="col">Transaction ID</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Date</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="transaction-id">#TX-10921</td>
+              <td><span class="transaction-customer"><span>Sarah Jenkins</span><span class="transaction-email">sarah.j@example.com</span></span></td>
+              <td class="transaction-date">Oct 04, 2026 14:22</td>
+              <td class="transaction-amount">$249.00</td>
+              <td><span class="badge badge-success">Completed</span></td>
+            </tr>
+            <tr>
+              <td class="transaction-id">#TX-10920</td>
+              <td><span class="transaction-customer"><span>Michael Chen</span><span class="transaction-email">m.chen@devmail.io</span></span></td>
+              <td class="transaction-date">Oct 04, 2026 11:05</td>
+              <td class="transaction-amount">$89.50</td>
+              <td><span class="badge badge-warning">Pending</span></td>
+            </tr>
+            <tr>
+              <td class="transaction-id">#TX-10919</td>
+              <td><span class="transaction-customer"><span>Elena Rostova</span><span class="transaction-email">elena@domain.org</span></span></td>
+              <td class="transaction-date">Oct 03, 2026 18:40</td>
+              <td class="transaction-amount">$1,200.00</td>
+              <td><span class="badge badge-success">Completed</span></td>
+            </tr>
+            <tr>
+              <td class="transaction-id">#TX-10918</td>
+              <td><span class="transaction-customer"><span>David Kim</span><span class="transaction-email">dkim@techcorp.com</span></span></td>
+              <td class="transaction-date">Oct 03, 2026 09:15</td>
+              <td class="transaction-amount">$45.00</td>
+              <td><span class="badge badge-danger">Failed</span></td>
+            </tr>
+            <tr>
+              <td class="transaction-id">#TX-10917</td>
+              <td><span class="transaction-customer"><span>Amira Patel</span><span class="transaction-email">amira.p@workspace.co</span></span></td>
+              <td class="transaction-date">Oct 02, 2026 16:30</td>
+              <td class="transaction-amount">$310.25</td>
+              <td><span class="badge badge-success">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="transactions-footer">
+        <a href="#">View All Transactions</a>
+      </footer>
     </section>
 
     
