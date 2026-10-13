@@ -1,0 +1,686 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "node_type": "file",
+      "size": 1928,
+      "ext": ".md",
+      "id": "PROJECT_RULES.md"
+    },
+    {
+      "node_type": "symbol",
+      "name": "# PROJECT RULES & ARCHITECTURE SPECIFICATION",
+      "kind": "section",
+      "line": 1,
+      "id": "PROJECT_RULES.md::#_PROJECT RULES & ARCHITECTURE SPECIFICATION"
+    },
+    {
+      "node_type": "symbol",
+      "name": "## My Test",
+      "kind": "section",
+      "line": 2,
+      "id": "PROJECT_RULES.md::##_My Test"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 1. Project Overview & Architecture",
+      "kind": "section",
+      "line": 8,
+      "id": "PROJECT_RULES.md::###_1. Project Overview & Architecture"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 2. Design System & UI Specifications",
+      "kind": "section",
+      "line": 17,
+      "id": "PROJECT_RULES.md::###_2. Design System & UI Specifications"
+    },
+    {
+      "node_type": "symbol",
+      "name": "#### Active Theme Tokens:",
+      "kind": "section",
+      "line": 23,
+      "id": "PROJECT_RULES.md::####_Active Theme Tokens:"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 3. Engineering & Linter Standards",
+      "kind": "section",
+      "line": 41,
+      "id": "PROJECT_RULES.md::###_3. Engineering & Linter Standards"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 4. AI Coding Agent Operating Directives",
+      "kind": "section",
+      "line": 53,
+      "id": "PROJECT_RULES.md::###_4. AI Coding Agent Operating Directives"
+    },
+    {
+      "node_type": "file",
+      "size": 5229,
+      "ext": ".html",
+      "id": "index.html"
+    },
+    {
+      "node_type": "symbol",
+      "name": "Title: Login",
+      "kind": "title",
+      "line": 6,
+      "id": "index.html::title"
+    },
+    {
+      "node_type": "symbol",
+      "name": "handleLogin",
+      "kind": "function",
+      "line": 205,
+      "id": "index.html::handleLogin"
+    },
+    {
+      "node_type": "symbol",
+      "name": "form#loginForm",
+      "kind": "form",
+      "line": 167,
+      "id": "index.html::form#loginForm"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#username",
+      "kind": "element",
+      "line": 170,
+      "id": "index.html::input#username"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#password",
+      "kind": "element",
+      "line": 180,
+      "id": "index.html::input#password"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#remember",
+      "kind": "element",
+      "line": 190,
+      "id": "index.html::input#remember"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[text:username]",
+      "kind": "element",
+      "line": 170,
+      "id": "index.html::input[text:username]::170"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[password:password]",
+      "kind": "element",
+      "line": 180,
+      "id": "index.html::input[password:password]::180"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[checkbox:remember]",
+      "kind": "element",
+      "line": 190,
+      "id": "index.html::input[checkbox:remember]::190"
+    },
+    {
+      "node_type": "symbol",
+      "name": "button:Sign In",
+      "kind": "element",
+      "line": 196,
+      "id": "index.html::button::196"
+    },
+    {
+      "id": "https://fonts.googleapis.com"
+    },
+    {
+      "id": "https://fonts.gstatic.com"
+    },
+    {
+      "id": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    },
+    {
+      "node_type": "file",
+      "size": 0,
+      "ext": ".py",
+      "id": "workflow_git.py"
+    },
+    {
+      "node_type": "file",
+      "size": 2521,
+      "ext": ".md",
+      "id": "CODING_STANDARDS.md"
+    },
+    {
+      "node_type": "symbol",
+      "name": "# CODING STANDARDS & ENGINEERING GUIDELINES",
+      "kind": "section",
+      "line": 1,
+      "id": "CODING_STANDARDS.md::#_CODING STANDARDS & ENGINEERING GUIDELINES"
+    },
+    {
+      "node_type": "symbol",
+      "name": "## My Test",
+      "kind": "section",
+      "line": 2,
+      "id": "CODING_STANDARDS.md::##_My Test"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 1. Code Formatting & Syntax Rules",
+      "kind": "section",
+      "line": 8,
+      "id": "CODING_STANDARDS.md::###_1. Code Formatting & Syntax Rules"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 2. Technology & Language Standards",
+      "kind": "section",
+      "line": 17,
+      "id": "CODING_STANDARDS.md::###_2. Technology & Language Standards"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 3. Styling & Design Token Conventions",
+      "kind": "section",
+      "line": 26,
+      "id": "CODING_STANDARDS.md::###_3. Styling & Design Token Conventions"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 4. Code Quality & Modularity Principles",
+      "kind": "section",
+      "line": 50,
+      "id": "CODING_STANDARDS.md::###_4. Code Quality & Modularity Principles"
+    },
+    {
+      "node_type": "symbol",
+      "name": "### 5. Pre-Commit Checklist for Developers & AI Agents",
+      "kind": "section",
+      "line": 59,
+      "id": "CODING_STANDARDS.md::###_5. Pre-Commit Checklist for Developers & AI Agents"
+    },
+    {
+      "node_type": "file",
+      "size": 13979,
+      "ext": ".html",
+      "id": "dashboard.html"
+    },
+    {
+      "node_type": "symbol",
+      "name": "Title: Dashboard with Sidebar &amp; Cards",
+      "kind": "title",
+      "line": 6,
+      "id": "dashboard.html::title"
+    },
+    {
+      "node_type": "symbol",
+      "name": "toggleSubMenu",
+      "kind": "function",
+      "line": 490,
+      "id": "dashboard.html::toggleSubMenu"
+    },
+    {
+      "node_type": "symbol",
+      "name": "h2#recent-transactions-title",
+      "kind": "element",
+      "line": 482,
+      "id": "dashboard.html::h2#recent-transactions-title"
+    },
+    {
+      "node_type": "file",
+      "size": 16469,
+      "ext": ".html",
+      "id": "client_roles.html"
+    },
+    {
+      "node_type": "symbol",
+      "name": "Title: Client Roles - Smape Admin",
+      "kind": "title",
+      "line": 6,
+      "id": "client_roles.html::title"
+    },
+    {
+      "node_type": "symbol",
+      "name": "toggleSubMenu",
+      "kind": "function",
+      "line": 536,
+      "id": "client_roles.html::toggleSubMenu"
+    },
+    {
+      "node_type": "symbol",
+      "name": "toggleProfileMenu",
+      "kind": "function",
+      "line": 541,
+      "id": "client_roles.html::toggleProfileMenu"
+    },
+    {
+      "node_type": "symbol",
+      "name": "logout",
+      "kind": "function",
+      "line": 554,
+      "id": "client_roles.html::logout"
+    },
+    {
+      "node_type": "symbol",
+      "name": "div#profileMenu",
+      "kind": "element",
+      "line": 457,
+      "id": "client_roles.html::div#profileMenu"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[text:Search client roles...]",
+      "kind": "element",
+      "line": 444,
+      "id": "client_roles.html::input[text:Search client roles...]::444"
+    },
+    {
+      "node_type": "symbol",
+      "name": "button:Jane Doe\n              Adminis",
+      "kind": "element",
+      "line": 449,
+      "id": "client_roles.html::button::449"
+    },
+    {
+      "node_type": "symbol",
+      "name": "button:+ Add New Role",
+      "kind": "element",
+      "line": 473,
+      "id": "client_roles.html::button::473"
+    },
+    {
+      "node_type": "file",
+      "size": 2579,
+      "ext": ".html",
+      "id": "contect-us.html"
+    },
+    {
+      "node_type": "symbol",
+      "name": "Title: Contact Us",
+      "kind": "title",
+      "line": 6,
+      "id": "contect-us.html::title"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#name",
+      "kind": "element",
+      "line": 69,
+      "id": "contect-us.html::input#name"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#email",
+      "kind": "element",
+      "line": 73,
+      "id": "contect-us.html::input#email"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input#subject",
+      "kind": "element",
+      "line": 77,
+      "id": "contect-us.html::input#subject"
+    },
+    {
+      "node_type": "symbol",
+      "name": "textarea#message",
+      "kind": "element",
+      "line": 81,
+      "id": "contect-us.html::textarea#message"
+    },
+    {
+      "node_type": "symbol",
+      "name": "form[#]",
+      "kind": "form",
+      "line": 66,
+      "id": "contect-us.html::form[#]"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[text:name]",
+      "kind": "element",
+      "line": 69,
+      "id": "contect-us.html::input[text:name]::69"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[email:email]",
+      "kind": "element",
+      "line": 73,
+      "id": "contect-us.html::input[email:email]::73"
+    },
+    {
+      "node_type": "symbol",
+      "name": "input[text:subject]",
+      "kind": "element",
+      "line": 77,
+      "id": "contect-us.html::input[text:subject]::77"
+    },
+    {
+      "node_type": "symbol",
+      "name": "button:Send Message",
+      "kind": "element",
+      "line": 83,
+      "id": "contect-us.html::button::83"
+    },
+    {
+      "node_type": "artifact",
+      "size": 181,
+      "scanner_type": "repomix",
+      "id": ".ai-context/codebase-digest.md"
+    }
+  ],
+  "links": [
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::#_PROJECT RULES & ARCHITECTURE SPECIFICATION"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::##_My Test"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::###_1. Project Overview & Architecture"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::###_2. Design System & UI Specifications"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::####_Active Theme Tokens:"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::###_3. Engineering & Linter Standards"
+    },
+    {
+      "relationship": "contains",
+      "source": "PROJECT_RULES.md",
+      "target": "PROJECT_RULES.md::###_4. AI Coding Agent Operating Directives"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::title"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::handleLogin"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::form#loginForm"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input#username"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input#password"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input#remember"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input[text:username]::170"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input[password:password]::180"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::input[checkbox:remember]::190"
+    },
+    {
+      "relationship": "contains",
+      "source": "index.html",
+      "target": "index.html::button::196"
+    },
+    {
+      "relationship": "imports",
+      "source": "index.html",
+      "target": "https://fonts.googleapis.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "index.html",
+      "target": "https://fonts.gstatic.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "index.html",
+      "target": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::#_CODING STANDARDS & ENGINEERING GUIDELINES"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::##_My Test"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::###_1. Code Formatting & Syntax Rules"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::###_2. Technology & Language Standards"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::###_3. Styling & Design Token Conventions"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::###_4. Code Quality & Modularity Principles"
+    },
+    {
+      "relationship": "contains",
+      "source": "CODING_STANDARDS.md",
+      "target": "CODING_STANDARDS.md::###_5. Pre-Commit Checklist for Developers & AI Agents"
+    },
+    {
+      "relationship": "contains",
+      "source": "dashboard.html",
+      "target": "dashboard.html::title"
+    },
+    {
+      "relationship": "contains",
+      "source": "dashboard.html",
+      "target": "dashboard.html::toggleSubMenu"
+    },
+    {
+      "relationship": "contains",
+      "source": "dashboard.html",
+      "target": "dashboard.html::h2#recent-transactions-title"
+    },
+    {
+      "relationship": "imports",
+      "source": "dashboard.html",
+      "target": "https://fonts.googleapis.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "dashboard.html",
+      "target": "https://fonts.gstatic.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "dashboard.html",
+      "target": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::title"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::toggleSubMenu"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::toggleProfileMenu"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::logout"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::div#profileMenu"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::input[text:Search client roles...]::444"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::button::449"
+    },
+    {
+      "relationship": "contains",
+      "source": "client_roles.html",
+      "target": "client_roles.html::button::473"
+    },
+    {
+      "relationship": "imports",
+      "source": "client_roles.html",
+      "target": "https://fonts.googleapis.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "client_roles.html",
+      "target": "https://fonts.gstatic.com"
+    },
+    {
+      "relationship": "imports",
+      "source": "client_roles.html",
+      "target": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::title"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input#name"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input#email"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input#subject"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::textarea#message"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::form[#]"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input[text:name]::69"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input[email:email]::73"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::input[text:subject]::77"
+    },
+    {
+      "relationship": "contains",
+      "source": "contect-us.html",
+      "target": "contect-us.html::button::83"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "PROJECT_RULES.md"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "index.html"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "workflow_git.py"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "CODING_STANDARDS.md"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "dashboard.html"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "client_roles.html"
+    },
+    {
+      "relationship": "digests",
+      "source": ".ai-context/codebase-digest.md",
+      "target": "contect-us.html"
+    }
+  ]
+}
