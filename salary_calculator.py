@@ -6,9 +6,9 @@ import sys
 
 
 EMPLOYEES: list[dict[str, object]] = [
-    {"id": 1, "name": "Alice Johnson", "salary": 5200.00, "bonus_percent": 10},
-    {"id": 2, "name": "Brian Chen", "salary": 4750.00, "bonus_percent": 8},
-    {"id": 3, "name": "Carla Diaz", "salary": 6100.00, "bonus_percent": 12},
+    {"id": 1, "name": "John", "salary": 50000, "bonus_percent": 10},
+    {"id": 2, "name": "Alice", "salary": 60000, "bonus_percent": 15},
+    {"id": 3, "name": "Bob", "salary": 45000, "bonus_percent": 5},
 ]
 
 REQUIRED_FIELDS = ("id", "name", "salary", "bonus_percent")
@@ -60,14 +60,23 @@ def validate_employees(employees: list[dict[str, object]]) -> None:
 
 
 def print_salary_report(employees: list[dict[str, object]]) -> None:
-    """Validate and print each employee's ID, name, and monthly salary."""
+    """Validate and print each employee's salary, bonus, and total salary."""
     validate_employees(employees)
 
-    print(f"{'Employee ID':<12} {'Name':<24} {'Monthly Salary':>16}")
-    print("-" * 54)
+    print(
+        f"{'Employee ID':<12} {'Name':<24} {'Monthly Salary':>16} "
+        f"{'Bonus':>14} {'Total Salary':>16}"
+    )
+    print("-" * 86)
     for employee in employees:
         salary = Decimal(str(employee["salary"]))
-        print(f"{str(employee['id']):<12} {str(employee['name']):<24} {salary:>16,.2f}")
+        bonus_percent = Decimal(str(employee["bonus_percent"]))
+        bonus = salary * bonus_percent / Decimal("100")
+        total_salary = salary + bonus
+        print(
+            f"{str(employee['id']):<12} {str(employee['name']):<24} "
+            f"{salary:>16,.2f} {bonus:>14,.2f} {total_salary:>16,.2f}"
+        )
 
 
 def main() -> int:
