@@ -1,4 +1,6 @@
 import math
+from collections.abc import Sequence
+from dataclasses import dataclass
 
 
 employees = [
@@ -6,6 +8,14 @@ employees = [
     {"id": 2, "name": "Bob Smith", "salary": 60000, "bonus_percent": 15},
     {"id": 3, "name": "Carol Davis", "salary": 45000, "bonus_percent": 5},
 ]
+
+
+@dataclass(frozen=True, slots=True)
+class EmployeeSummary:
+    employee_count: int
+    average_base_salary: float
+    highest_paid_employee: str | None
+    highest_total_salary: float | None
 
 
 def _is_finite_number(value: object) -> bool:
@@ -17,7 +27,9 @@ def _is_finite_number(value: object) -> bool:
         return False
 
 
-def _validate_employee(employee: object) -> tuple[int | float, int | float]:
+def _validate_employee(
+    employee: object,
+) -> tuple[int | float, int | float, str]:
     if not isinstance(employee, dict):
         raise TypeError("employee must be a dictionary")
 
@@ -41,17 +53,54 @@ def _validate_employee(employee: object) -> tuple[int | float, int | float]:
     if not _is_finite_number(bonus_percent):
         raise ValueError("employee field 'bonus_percent' must be a finite number")
 
-    return salary, bonus_percent
+    return salary, bonus_percent, name
 
 
 def calculate_bonus(employee: dict[str, object]) -> float:
-    salary, bonus_percent = _validate_employee(employee)
+    salary, bonus_percent, _ = _validate_employee(employee)
     return salary * bonus_percent / 100
 
 
+def _calculate_total_salary(
+    salary: int | float,
+    bonus_percent: int | float,
+) -> float:
+    return salary + salary * bonus_percent / 100
+
+
 def calculate_total_salary(employee: dict[str, object]) -> float:
-    salary, _ = _validate_employee(employee)
-    return salary + calculate_bonus(employee)
+    salary, bonus_percent, _ = _validate_employee(employee)
+    return _calculate_total_salary(salary, bonus_percent)
+
+
+def summarize_employees(
+    employee_records: Sequence[dict[str, object]],
+) -> EmployeeSummary:
+    if not employee_records:
+        return EmployeeSummary(
+            employee_count=0,
+            average_base_salary=0.0,
+            highest_paid_employee=None,
+            highest_total_salary=None,
+        )
+
+    salaries: list[int | float] = []
+    highest_paid_employee: str | None = None
+    highest_total_salary: float | None = None
+    for employee in employee_records:
+        salary, bonus_percent, name = _validate_employee(employee)
+        total_salary = _calculate_total_salary(salary, bonus_percent)
+        salaries.append(salary)
+        if highest_total_salary is None or total_salary > highest_total_salary:
+            highest_paid_employee = name
+            highest_total_salary = total_salary
+
+    return EmployeeSummary(
+        employee_count=len(employee_records),
+        average_base_salary=sum(salaries) / len(salaries),
+        highest_paid_employee=highest_paid_employee,
+        highest_total_salary=highest_total_salary,
+    )
 
 
 def print_salary_report() -> None:
@@ -70,6 +119,19 @@ def print_salary_report() -> None:
             f"{employee['id']:<5}{employee['name']:<20}"
             f"{employee['salary']:>17,.0f}{bonus:>15,.0f}"
             f"{total_salary:>20,.0f}"
+        )
+
+    summary = summarize_employees(employees)
+    print("-" * 77)
+    print(f"Employee Count: {summary.employee_count}")
+    print(f"Average Base Salary: {summary.average_base_salary:,.2f}")
+    if (
+        summary.highest_paid_employee is not None
+        and summary.highest_total_salary is not None
+    ):
+        print(
+            f"Highest-Paid Employee: {summary.highest_paid_employee} "
+            f"({summary.highest_total_salary:,.2f})"
         )
 
 
