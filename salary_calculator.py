@@ -1,4 +1,4 @@
-"""Print a salary and bonus report for the sample employees."""
+"""Print a salary and bonus report; employee salary values represent monthly base pay."""
 
 import math
 from collections.abc import Mapping, Sequence
@@ -7,7 +7,7 @@ from typing import TypedDict
 
 class SalarySummary(TypedDict):
     total_employees: int
-    average_salary: float | None
+    average_monthly_salary: float | None
     highest_paid_employee: str | None
 
 
@@ -94,27 +94,29 @@ def calculate_total_salary(employee: Employee) -> float:
 
 
 def calculate_summary(employees: Sequence[Employee]) -> SalarySummary:
-    """Calculate headcount, average base salary, and highest total compensation."""
+    """Calculate headcount, average monthly base salary, and highest total compensation."""
     validate_employees(employees)
     if not employees:
         return {
             "total_employees": 0,
-            "average_salary": None,
+            "average_monthly_salary": None,
             "highest_paid_employee": None,
         }
 
     salaries = [float(employee["salary"]) for employee in employees]
     try:
-        average_salary = math.fsum(salaries) / len(salaries)
+        average_monthly_salary = math.fsum(salaries) / len(salaries)
     except OverflowError as error:
-        raise ValueError("The average salary is outside the supported numeric range.") from error
-    if not math.isfinite(average_salary):
-        raise ValueError("The average salary is outside the supported numeric range.")
+        raise ValueError(
+            "The average monthly salary is outside the supported numeric range."
+        ) from error
+    if not math.isfinite(average_monthly_salary):
+        raise ValueError("The average monthly salary is outside the supported numeric range.")
 
     highest_paid = max(employees, key=calculate_total_salary)
     return {
         "total_employees": len(employees),
-        "average_salary": average_salary,
+        "average_monthly_salary": average_monthly_salary,
         "highest_paid_employee": str(highest_paid["name"]),
     }
 
@@ -133,9 +135,9 @@ def format_report(employees: Sequence[Employee]) -> str:
         )
 
     summary = calculate_summary(employees)
-    average_salary = (
-        f"{summary['average_salary']:.2f}"
-        if summary["average_salary"] is not None
+    average_monthly_salary = (
+        f"{summary['average_monthly_salary']:.2f}"
+        if summary["average_monthly_salary"] is not None
         else "N/A"
     )
     highest_paid = summary["highest_paid_employee"] or "N/A"
@@ -144,7 +146,7 @@ def format_report(employees: Sequence[Employee]) -> str:
             "",
             "Summary",
             f"Total Employees: {summary['total_employees']}",
-            f"Average Salary: {average_salary}",
+            f"Average Monthly Salary: {average_monthly_salary}",
             f"Highest Paid Employee: {highest_paid}",
         ]
     )
