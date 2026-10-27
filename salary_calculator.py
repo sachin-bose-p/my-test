@@ -71,6 +71,8 @@ def validate_employees(employees: Sequence[Employee]) -> None:
     """Reject malformed employee data before calculations or report output."""
     if not isinstance(employees, Sequence) or isinstance(employees, (str, bytes)):
         raise TypeError("Employees must be a sequence of employee dictionaries.")
+    if not employees:
+        raise ValueError("Employees must contain at least one employee.")
 
     for index, employee in enumerate(employees):
         _validate_employee(employee, index)
