@@ -25,6 +25,14 @@ def _validate_employee(employee: object) -> tuple[int | float, int | float]:
         if field not in employee:
             raise ValueError(f"employee is missing required field '{field}'")
 
+    employee_id = employee["id"]
+    if not _is_finite_number(employee_id):
+        raise ValueError("employee field 'id' must be a finite number")
+
+    name = employee["name"]
+    if not isinstance(name, str):
+        raise ValueError("employee field 'name' must be a string")
+
     salary = employee["salary"]
     if not _is_finite_number(salary):
         raise ValueError("employee field 'salary' must be a finite number")
