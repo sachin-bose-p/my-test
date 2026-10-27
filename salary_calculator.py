@@ -60,7 +60,7 @@ def validate_employees(employees: list[dict[str, object]]) -> None:
 
 
 def print_salary_report(employees: list[dict[str, object]]) -> None:
-    """Validate and print each employee's salary, bonus, and total salary."""
+    """Validate and print the employee salary report and summary metrics."""
     validate_employees(employees)
 
     print(
@@ -68,15 +68,36 @@ def print_salary_report(employees: list[dict[str, object]]) -> None:
         f"{'Bonus':>14} {'Total Salary':>16}"
     )
     print("-" * 86)
+    total_base_salary = Decimal("0")
+    highest_paid_name: str | None = None
+    highest_total_salary: Decimal | None = None
     for employee in employees:
         salary = Decimal(str(employee["salary"]))
         bonus_percent = Decimal(str(employee["bonus_percent"]))
         bonus = salary * bonus_percent / Decimal("100")
         total_salary = salary + bonus
+        total_base_salary += salary
+        if highest_total_salary is None or total_salary > highest_total_salary:
+            highest_paid_name = str(employee["name"])
+            highest_total_salary = total_salary
         print(
             f"{str(employee['id']):<12} {str(employee['name']):<24} "
             f"{salary:>16,.2f} {bonus:>14,.2f} {total_salary:>16,.2f}"
         )
+
+    print()
+    print(f"Total Employees: {len(employees)}")
+    if not employees:
+        print("Average Salary: N/A")
+        print("No employee data available.")
+        return
+
+    average_salary = total_base_salary / len(employees)
+    print(f"Average Salary: {average_salary:.2f}")
+    print(
+        f"Highest-Paid Employee: {highest_paid_name} "
+        f"(Total Salary: {highest_total_salary:,.2f})"
+    )
 
 
 def main() -> int:
