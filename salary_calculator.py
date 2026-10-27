@@ -14,9 +14,9 @@ class SalarySummary(TypedDict):
 Employee = Mapping[str, object]
 
 EMPLOYEES: list[dict[str, object]] = [
-    {"id": 1, "name": "Jordan", "salary": 50000, "bonus_percent": 10},
-    {"id": 2, "name": "Alice", "salary": 60000, "bonus_percent": 15},
-    {"id": 3, "name": "Morgan", "salary": 45000, "bonus_percent": 5},
+    {"id": 101, "name": "John", "salary": 50000, "bonus_percent": 10},
+    {"id": 102, "name": "Alice", "salary": 60000, "bonus_percent": 15},
+    {"id": 103, "name": "Bob", "salary": 45000, "bonus_percent": 5},
 ]
 
 
